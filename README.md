@@ -5,7 +5,7 @@ This project is a robot car that will always stay 15cm away from a setpoint by u
 * [Design](#Design)
 * [Wiring](#Wiring)
 * [Code](#Code)
-* [Final Product](#Final_Product)
+* [Final Product](#final-product)
 * [Reflection](#Reflection)
 ---
 
