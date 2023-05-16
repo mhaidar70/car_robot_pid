@@ -25,7 +25,8 @@ Here is our design pictures that we protyped and made in Onshape. The reason for
 
 ## Wiring
 Below is the complete wiring of what we used for this car. 
-
+![Screenshot 2023-05-16 123845](https://github.com/mhaidar70/car_robot_pid/assets/112962044/7225c21c-cf04-4d3e-a901-3bd05c76d1f3)
+Credit goes to [IDeAte Courses](https://courses.ideate.cmu.edu/16-223/f2016/text/ex/Arduino/DRV8833-motor-driver/DRV8833-motor-driver.html)
 
 ## Code
 Below is our code that oves the car back and forth using PID tuning on a setpoint. 
