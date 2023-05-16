@@ -82,6 +82,7 @@ while True:
 
         # If distance is greater than 15 cm, move forward
         if distance > 15:
+            print("going forward")
             AIN1.value = True
             AIN2.value = False
             BIN1.value = True
@@ -89,6 +90,7 @@ while True:
 
         # If distance is less than 15 cm, move backward
         elif distance < 15:
+            print("going backwards")
             AIN1.value = False
             AIN2.value = True
             BIN1.value = False
@@ -96,18 +98,14 @@ while True:
 
         # If distance is exactly 15 cm, stop moving
         else:
+            print("stopped")
             AIN1.value = False
             AIN2.value = False
             BIN1.value = False
             BIN2.value = False
 
-        # Turn on motors
-        AIN1.value = True
-        AIN2.value = True
-        BIN1.value = True
-        BIN2.value = True
         # Wait for 0.1 seconds before reading distance again
-        time.sleep(0.1)
+        time.sleep(.2)
 
     # If there's an error reading distance, print the error message and continue
     except RuntimeError as e:
