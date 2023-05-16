@@ -1,28 +1,112 @@
-# CPyProjectTemplate
-Put a description for your project here!
-This repo is a template VS code project for CircuitPython projects that automatically uploads your code to the board when you press F5. Requires F5Anything extension.
-## Use
-### Every new project:
-1. Make a GitHub account if you don't have one with your normal school credentials and sign into it.
-2. Click the big green Use This Template button at the top of this page.
-3. Name the new repository something appropriate to the purpose of your project (Your first one should probably be named `CircuitPython`).
-4. Hit "Create repository from template." (The default settings should be fine.)
-5. Open VS Code on your machine. Click Clone Repository.
-6. Paste in the link to the new repository you've just created from the template and hit enter.
-7. For the location, select the "STUDENT" drive if you have it or the document folder if you don't.
-8. Hit "Open Cloned Directory."
-9. Install the reccomended extensions when you get that popup in the lower right corner.
-### To commit from VS Code:
-1. Go to the little branch icon in the left bar of VS Code.
-2. Click the + icon next  to the files you want to commit.
-3. Write a message that descibes your changes in the "Message" box and hit commit.
-4. If you get an error about user.name and user.email, see the next section.
-5. Click the "Sync changes" button.
-### If you get an error about user.name and user.email
-1. In VS Code, hit `` Ctrl+Shift+` ``
-2. Filling in your actual information, run the following commands one line at a time. The paste shortcut is `Ctrl+V` or you can right click then hit paste. Spelling must match exactly:
+# PID Robot Car
+This project is a robot car that will always stay 15cm away from a setpoint by using 2 TT Motors, DRV8833, and Ultrasonic sensor.
+## Table of Contents
+* [Planning](#Planning)
+* [Design](#Design)
+* [Wiring](#Wiring)
+* [Code](#Code)
+* [Final Product](#Final_Product)
+* [Reflection](#Reflection)
+---
+
+## Planning
+Below is a link to our planning document where we brainstormed ideas, equipments, and time management.
+
+[Planning Document](https://docs.google.com/document/d/1pS8x4_KN1o8x4viN81sqH_3ViWb4FMq0SSYEMJr-LKw/edit#)
+
+## Design
+Here is our design pictures that we protyped and made in Onshape. The reason for this design was because it was very simple and worked well in moving forwards and backwards smoothly. 
+
+![Screenshot 2023-04-17 112206](https://user-images.githubusercontent.com/112962044/232820076-10aa31a3-67df-49f4-90ae-312871f2cb4b.png)
+![Screenshot 2023-04-18 110646](https://user-images.githubusercontent.com/112962044/232820331-7b2efcb0-1866-4748-aa62-67451eb60ea8.png)
+![Screenshot 2023-04-18 111012](https://user-images.githubusercontent.com/112962044/232821432-d45af163-7280-4c60-adc9-660c5de55af6.png)
+
+
+
+## Wiring
+Below is the complete wiring of what we used for this car. 
+
+
+## Code
+Below is our code that oves the car back and forth using PID tuning on a setpoint. 
+
+```python
+
+import time
+import board
+import adafruit_hcsr04
+import digitalio
+
+# Ultrasonic Sensor Pins
+TRIG_PIN = board.D2
+ECHO_PIN = board.D3
+
+# Motor Driver Pins
+AIN1_PIN = board.D5
+AIN2_PIN = board.D6
+BIN1_PIN = board.D7
+BIN2_PIN = board.D8
+
+# Set up GPIO pins
+sonar = adafruit_hcsr04.HCSR04(trigger_pin=TRIG_PIN, echo_pin=ECHO_PIN)
+AIN1 = digitalio.DigitalInOut(AIN1_PIN)
+AIN2 = digitalio.DigitalInOut(AIN2_PIN)
+BIN1 = digitalio.DigitalInOut(BIN1_PIN)
+BIN2 = digitalio.DigitalInOut(BIN2_PIN)
+
+
+AIN1.direction = digitalio.Direction.OUTPUT
+AIN2.direction = digitalio.Direction.OUTPUT
+BIN1.direction = digitalio.Direction.OUTPUT
+BIN2.direction = digitalio.Direction.OUTPUT
+
+
+# Set PWM pins to output low
+AIN1.value = False
+BIN1.value = False
+
+while True:
+    try:
+        # Read distance from ultrasonic sensor
+        distance = sonar.distance
+        print("Distance: {0:0.2f} cm".format(distance))
+
+        # If distance is greater than 15 cm, move forward
+        if distance > 15:
+            AIN1.value = True
+            AIN2.value = False
+            BIN1.value = True
+            BIN2.value = False
+
+        # If distance is less than 15 cm, move backward
+        elif distance < 15:
+            AIN1.value = False
+            AIN2.value = True
+            BIN1.value = False
+            BIN2.value = True
+
+        # If distance is exactly 15 cm, stop moving
+        else:
+            AIN1.value = False
+            AIN2.value = False
+            BIN1.value = False
+            BIN2.value = False
+
+        # Turn on motors
+        AIN1.value = True
+        AIN2.value = True
+        BIN1.value = True
+        BIN2.value = True
+        # Wait for 0.1 seconds before reading distance again
+        time.sleep(0.1)
+
+    # If there's an error reading distance, print the error message and continue
+    except RuntimeError as e:
+        print("Error: ", e)
+        continue
 ```
-git config --global user.name YOURUSERNAME
-git config --global user.email YOURSCHOOLEMAIL
-```
-3. Return to step 3 of the previous section.
+
+## Final Product
+
+## Reflection
+
