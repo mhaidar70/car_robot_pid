@@ -124,6 +124,5 @@ while True:
 
 ## Reflection
 ---
-Aside from some rocky features in the production of this project, with a lot to be concered about in the background but thanks to some previous models from a while ago, good wiring, some long expected code, and then a battery change, we are finished with the project.
--
+
 
