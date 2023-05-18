@@ -116,17 +116,12 @@ while True:
 ```
 
 ## Final Product
+![image0](https://github.com/mhaidar70/car_robot_pid/assets/112962044/b6d5e498-f62f-42a2-a142-4dba21abc1e0)
+![image1](https://github.com/mhaidar70/car_robot_pid/assets/112962044/995dc747-e31d-40be-a262-a61725cce564)
+![image2](https://github.com/mhaidar70/car_robot_pid/assets/112962044/3985b8b0-9301-4e6e-84da-cb57b85613d5)
 
-![Images](images/SideimageCarPID.jpg)
 
-![Images](images/TOPimageCarPID.jpg)
-
-![Images](images/FrontView.jpg)
-
-![Images](images/TopViewbetter.jpg)
 
 ## Reflection
----
-Aside from some rocky features in the production of this project, with a lot to be concered about in the background but thanks to some previous models from a while ago, good wiring, some long expected code, and then a battery change, we are finished with the project.
--
+
 
