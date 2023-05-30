@@ -146,7 +146,10 @@ while True:
 ![image0 (1)](https://github.com/mhaidar70/car_robot_pid/assets/112962044/dfc08db3-2cad-4b32-84b9-7e489133814d)
 
 
+https://github.com/mhaidar70/car_robot_pid/assets/112962044/b80ec4a4-4b8d-4d2d-8a17-7ad1cf05856f
+
+
+
 
 ## Reflection
-
-
+Reflecting back on this project, I have learned quite a few things including coding and communication skills. For the coding part, giving my self an outline of what the robot should do then writing the code for each step made the project easier. For example: I would comment to make the robot go forward, then underneath it write the code to do that command. This way it showed a clear way to code while keeping things clean and understandable. I did have two problems throughout the project. First, the batteries I used were dead so the motors weren't running so I was concerned that my wiring was wrong, but after I showed it to the teacher and he said it's good, I realized that it must have something to do with the power. Once the batteries were replaced, the motors were running perfectly well. So make sure to check your motors are getting power by using a voltmeter to check the battery voltage. Second problem was that I wrote digital pins in the code which is used to move a motor in one direction only, so my motors were moving forwards only, making me frustrated. To solve this problem, I used analog io pins that allows the motor to run forwards and backwards. So digital io is used for one direction and analog io is used for both directions.
