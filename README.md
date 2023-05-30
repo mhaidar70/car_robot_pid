@@ -43,10 +43,23 @@ Below is our code that oves the car back and forth using PID tuning on a setpoin
 
 ```python
 
+
+
 import time
 import board
+import pwmio
 import adafruit_hcsr04
-import digitalio
+from simple_pid import PID
+
+
+
+setpoint=15
+pid = PID(11000, 3600, 2000, setpoint)
+
+pid.sample_time = 0.01  # Update every 0.01 seconds
+pid.output_limits = (-65535, 65535)    # Output duty_cycle will be between 0 and 10
+
+distance=0.0
 
 # Ultrasonic Sensor Pins
 TRIG_PIN = board.D2
@@ -60,59 +73,71 @@ BIN2_PIN = board.D8
 
 # Set up GPIO pins
 sonar = adafruit_hcsr04.HCSR04(trigger_pin=TRIG_PIN, echo_pin=ECHO_PIN)
-AIN1 = digitalio.DigitalInOut(AIN1_PIN)
-AIN2 = digitalio.DigitalInOut(AIN2_PIN)
-BIN1 = digitalio.DigitalInOut(BIN1_PIN)
-BIN2 = digitalio.DigitalInOut(BIN2_PIN)
+AIN1 = pwmio.PWMOut(AIN1_PIN)
+AIN2 = pwmio.PWMOut(AIN2_PIN)
+BIN1 = pwmio.PWMOut(BIN1_PIN)
+BIN2 = pwmio.PWMOut(BIN2_PIN)
 
 
-AIN1.direction = digitalio.Direction.OUTPUT
-AIN2.direction = digitalio.Direction.OUTPUT
-BIN1.direction = digitalio.Direction.OUTPUT
-BIN2.direction = digitalio.Direction.OUTPUT
 
 
 # Set PWM pins to output low
-AIN1.value = False
-BIN1.value = False
+AIN1.duty_cycle = 0
+BIN1.duty_cycle = 0
 
-while True:
+print("Lets go!")
+
+
+while True: 
+  
     try:
         # Read distance from ultrasonic sensor
         distance = sonar.distance
         print("Distance: {0:0.2f} cm".format(distance))
 
-        # If distance is greater than 15 cm, move forward
-        if distance > 15:
-            print("going forward")
-            AIN1.value = True
-            AIN2.value = False
-            BIN1.value = True
-            BIN2.value = False
+        # Compute new output from the PID according to the systems current duty_cycle
+        control = pid(distance)
+        print(control)
 
-        # If distance is less than 15 cm, move backward
-        elif distance < 15:
-            print("going backwards")
-            AIN1.value = False
-            AIN2.value = True
-            BIN1.value = False
-            BIN2.value = True
+        control = int(abs(control))
+        
 
-        # If distance is exactly 15 cm, stop moving
+        
+        # If distance is greater than setpoint, move forward
+        if distance > setpoint:
+            AIN1.duty_cycle = control
+            AIN2.duty_cycle = False
+            BIN1.duty_cycle = control
+            BIN2.duty_cycle = False
+
+        # If distance is less than setpoint, move backward
+        elif distance < setpoint:
+            AIN1.duty_cycle = False
+            AIN2.duty_cycle = control
+            BIN1.duty_cycle = False
+            BIN2.duty_cycle = control
+
+        # If distance is exactly setpoint, stop moving
         else:
             print("stopped")
-            AIN1.value = False
-            AIN2.value = False
-            BIN1.value = False
-            BIN2.value = False
+            AIN1.duty_cycle = False
+            AIN2.duty_cycle = False
+            BIN1.duty_cycle = False
+            BIN2.duty_cycle = False
 
-        # Wait for 0.1 seconds before reading distance again
+        # Wait for 0.2 seconds before reading distance again
         time.sleep(.2)
 
     # If there's an error reading distance, print the error message and continue
     except RuntimeError as e:
         print("Error: ", e)
         continue
+
+# Get P close to 15 but not completely so it's still oscillating
+# Get I the rectangle between setpoint and car to get close
+# Get D to maintain slope to 0
+
+
 ```
 
 ## Final Product
