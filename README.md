@@ -21,11 +21,14 @@ Below is a link to our planning document where we brainstormed ideas, equipments
 
 ## Design
 Here is our design pictures that we protyped and made in Onshape. The reason for this design was because it was very simple and worked well in moving forwards and backwards smoothly. This robot is similar to the one I created last year because this design works really well. I copied it from last year to this year because I knew I can't create a whole new car design and later code it too because I didn't have reliable partners that would do their part, and because I wouldn't have enough time. There were a few changes to it that I made. First I removed the servo holder because we didn't need it. Instead I laser cut a new part for the ultrasonic sensor so that it was held in the front. Second I didn't use motor brackets that hold it from moving around from last year because it worked the same with or without it. 
+ ## (These Onshape images are here to show what the base design looked like before production.)
 
 [Also our Onshape document](https://cvilleschools.onshape.com/documents/005e585cd5af9495849462fc/w/d7b6680123938b66cb7ad969/e/e5230d64fb9466e0788375d0)
-
+## Side view
 ![Screenshot 2023-04-17 112206](https://user-images.githubusercontent.com/112962044/232820076-10aa31a3-67df-49f4-90ae-312871f2cb4b.png)
+## Bottom View
 ![Screenshot 2023-04-18 110646](https://user-images.githubusercontent.com/112962044/232820331-7b2efcb0-1866-4748-aa62-67451eb60ea8.png)
+## Top view
 ![Screenshot 2023-04-18 111012](https://user-images.githubusercontent.com/112962044/232821432-d45af163-7280-4c60-adc9-660c5de55af6.png)
 
 
@@ -104,7 +107,7 @@ while True:
         # Compute new output from the PID according to the systems current duty_cycle
         control = pid(distance)
         print(control)
-
+`
         control = int(abs(control))
         
 
@@ -151,10 +154,18 @@ while True:
 ![image0 (1)](https://github.com/mhaidar70/car_robot_pid/assets/112962044/dfc08db3-2cad-4b32-84b9-7e489133814d)
 
 
+# Conclusions
+
 https://github.com/mhaidar70/car_robot_pid/assets/112962044/b80ec4a4-4b8d-4d2d-8a17-7ad1cf05856f
 
-
+## Planning Retrospect
+We had many Ideas with going about this project, mostly with the design. At the start, we knew that we wanted to do a robot that would stop at the wall but wanted to be original. We debated on whether or not it should look like WALL-E (since he is an awesome character and suits the theme pretty well). Or maybe a wagon, but in the end we decided for the sake of time (and braincells), we would rather use a template from Mohammed's previous project. (regretablly)
 
 
 ## Reflection
 Reflecting back on this project, I have learned quite a few things including coding and communication skills. For the coding part, giving my self an outline of what the robot should do then writing the code for each step made the project easier. For example: I would comment to make the robot go forward, then underneath it write the code to do that command. This way it showed a clear way to code while keeping things clean and understandable. I did have two problems throughout the project. First, the batteries I used were dead so the motors weren't running so I was concerned that my wiring was wrong, but after I showed it to the teacher and he said it's good, I realized that it must have something to do with the power. Once the batteries were replaced, the motors were running perfectly well. So make sure to check your motors are getting power by using a voltmeter to check the battery voltage. Second problem was that I wrote digital pins in the code which is used to move a motor in one direction only, so my motors were moving forwards only, making me frustrated. To solve this problem, I used analog io pins that allows the motor to run forwards and backwards. So digital io is used for one direction and analog io is used for both directions.
+
+---
+The End, enjoy your summer!
+
+-Atticus
