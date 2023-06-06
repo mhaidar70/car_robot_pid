@@ -12,7 +12,12 @@ This project is a robot car that will always stay 15cm away from a setpoint by u
 ## Planning
 Below is a link to our planning document where we brainstormed ideas, equipments, and time management.
 
+
 [Planning Document](https://docs.google.com/document/d/1pS8x4_KN1o8x4viN81sqH_3ViWb4FMq0SSYEMJr-LKw/edit#)
+
+
+![image](https://github.com/mhaidar70/car_robot_pid/assets/112962044/d3162ee5-9cc4-487c-bb34-742c35971fa2)
+
 
 ## Design
 Here is our design pictures that we protyped and made in Onshape. The reason for this design was because it was very simple and worked well in moving forwards and backwards smoothly. This robot is similar to the one I created last year because this design works really well. I copied it from last year to this year because I knew I can't create a whole new car design and later code it too because I didn't have reliable partners that would do their part, and because I wouldn't have enough time. There were a few changes to it that I made. First I removed the servo holder because we didn't need it. Instead I laser cut a new part for the ultrasonic sensor so that it was held in the front. Second I didn't use motor brackets that hold it from moving around from last year because it worked the same with or without it. 
