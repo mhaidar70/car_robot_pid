@@ -45,16 +45,17 @@ Below is our code that oves the car back and forth using PID tuning on a setpoin
 
 
 
+
 import time
 import board
-import pwmio
-import adafruit_hcsr04
-from simple_pid import PID
+import pwmio ## import library for robot control pins
+import adafruit_hcsr04 ## Ultrasonic library
+from simple_pid import PID ## importing pid library for the robot
 
 
 
-setpoint=15
-pid = PID(11000, 3600, 2000, setpoint)
+setpoint=15 ## the gial is 15cm away
+pid = PID(11000, 3600, 1500, setpoint)
 
 pid.sample_time = 0.01  # Update every 0.01 seconds
 pid.output_limits = (-65535, 65535)    # Output duty_cycle will be between 0 and 10
@@ -105,25 +106,25 @@ while True:
         
         # If distance is greater than setpoint, move forward
         if distance > setpoint:
-            AIN1.duty_cycle = control
-            AIN2.duty_cycle = False
-            BIN1.duty_cycle = control
-            BIN2.duty_cycle = False
+            AIN1.duty_cycle = control ## forward motor turns on
+            AIN2.duty_cycle = False ## Backward motors are off
+            BIN1.duty_cycle = control ## forward motor turns on
+            BIN2.duty_cycle = False ## Backward motor are off
 
         # If distance is less than setpoint, move backward
         elif distance < setpoint:
-            AIN1.duty_cycle = False
-            AIN2.duty_cycle = control
-            BIN1.duty_cycle = False
-            BIN2.duty_cycle = control
+            AIN1.duty_cycle = False ## forward motor turns off
+            AIN2.duty_cycle = control ## backward motor turns on
+            BIN1.duty_cycle = False  ## forward motor turns off
+            BIN2.duty_cycle = control ## backward motor turns on
 
         # If distance is exactly setpoint, stop moving
         else:
             print("stopped")
-            AIN1.duty_cycle = False
-            AIN2.duty_cycle = False
-            BIN1.duty_cycle = False
-            BIN2.duty_cycle = False
+            AIN1.duty_cycle = False ## all motors turned off
+            AIN2.duty_cycle = False ## all motors turned off
+            BIN1.duty_cycle = False ## all motors turned off
+            BIN2.duty_cycle = False ## all motors turned off
 
         # Wait for 0.2 seconds before reading distance again
         time.sleep(.2)
@@ -136,7 +137,6 @@ while True:
 # Get P close to 15 but not completely so it's still oscillating
 # Get I the rectangle between setpoint and car to get close
 # Get D to maintain slope to 0
-
 
 ```
 
